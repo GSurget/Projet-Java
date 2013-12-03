@@ -24,14 +24,14 @@ public class GameBoard extends JPanel implements MouseListener{
 	Wall wall;
 	Road road;
 	Grass grass;
-	Cars car1;
+	Cars car1 = new Cars(167, 267, 0, 0);
 	Font levelFont = new Font("SansSerif", Font.BOLD, 30);
 	FileReader fr;
 	
 	public GameBoard(){
 		chargerCircuit();
 		setFocusable(true);
-		addMouseListener(this);
+		addMouseListener(this);		
 	}
 	
 	public void chargerCircuit(){
@@ -76,7 +76,9 @@ public class GameBoard extends JPanel implements MouseListener{
 				}
 			}
 		}
-		catch(Exception ex){}
+		catch(Exception ex){
+			System.out.println("Probleme detecte :"+ex);
+		}
 		
 		repaint();
 	}
@@ -101,15 +103,11 @@ public class GameBoard extends JPanel implements MouseListener{
 		}
 		
 		try{
-			/*
-			ImageIcon imageVoit = new ImageIcon("Images/car.jpg");
-			Image voit = imageVoit.getImage();
-			g2d.drawImage(voit, 137, 267,null);
-			*/
-			Image voit = car1.getImage();
-			g2d.drawImage(voit, car1.getX(), car1.getY(),null);
+			g2d.drawImage(car1.getImage(), car1.getX(), car1.getY(),null);
 		}
-		catch(Exception ex){}
+		catch(Exception ex){
+			System.out.println("Probleme detecte :"+ex);
+		}
 		
 		g.setColor(Color.BLACK);
 		g.setFont(levelFont);
@@ -139,19 +137,19 @@ public class GameBoard extends JPanel implements MouseListener{
 		int sourisX = arg0.getX();
 		int sourisY = arg0.getY();
 		System.out.println("x ="+sourisX);
-		System.out.println("y ="+sourisY);
-		
-	//	car1.setX(sourisX);
-	//	car1.setY(sourisY);
-		/*
-		car1.setX(car1.getX() + car1.getVitesseX());
-		car1.setY(car1.getY() + car1.getVitesseY());
-		
-		car1.setVitesseX((sourisX - car1.getX())/10);
-		car1.setVitesseY((sourisY - car1.getY())/10);
-		*/
-		checkCollision();
-		repaint();
+		System.out.println("y ="+sourisY);		
+	
+		car1.setVitesseX((sourisX - car1.getX()));
+		car1.setVitesseY((sourisY - car1.getY()));
+			
+		if((car1.getX() != sourisX) && (car1.getY() != sourisY)){
+			car1.setX(car1.getX() + car1.getVitesseX()/10);
+			car1.setY(car1.getY() + car1.getVitesseY()/10);
+
+			verifCollision();
+			repaint();
+		}
+
 	}
 
 	@Override
@@ -160,7 +158,7 @@ public class GameBoard extends JPanel implements MouseListener{
 		
 	}
 	
-	public void checkCollision(){
+	public void verifCollision(){
 		
 	}
 }

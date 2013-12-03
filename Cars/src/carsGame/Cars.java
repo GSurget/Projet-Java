@@ -6,10 +6,11 @@ import java.awt.Rectangle;
 import javax.swing.ImageIcon;
 
 public class Cars {
-	int x=237,y=267;
+	int x=0,y=0;
 	int vitesseX=0, vitesseY=0;
 	String car = "CAR";
 	Image Car;
+	int vitesseTab[];
 
 	
 	public Cars(int startX, int startY, int startVitesseX, int startVitesseY){
@@ -43,6 +44,9 @@ public class Cars {
 		return vitesseY;
 	}
 	
+	public Image getImage(){
+		return Car;
+	}
 	public void setX(int newX){
 		this.x = newX;
 	}
@@ -57,9 +61,5 @@ public class Cars {
 	public void setVitesseY(int newVitesseY){
 		this.vitesseY = newVitesseY;
 	}
-	
-	public Image getImage(){
-		return Car;
-	}
-	
+		
 }
