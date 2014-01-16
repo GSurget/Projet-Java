@@ -458,7 +458,7 @@ public class GameBoard extends JPanel implements MouseListener, MouseMotionListe
 		
 	}
 	
-	public void prepaMouvement(Voiture v){
+	public void prepaMouvement(Voiture v){//Méthode vérifiant si un clic a été effetué dans un des cercles de commande et modifiant la vitesse en conséquence
 		
 			if((Math.pow((sourisX-735),2)+Math.pow((sourisY-585),2))<=225){
 				v.setVitesseX(v.getVitesseX()-30);
@@ -508,7 +508,7 @@ public class GameBoard extends JPanel implements MouseListener, MouseMotionListe
 				System.out.println("On y est9 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 			}
 	}
-	public void mouvement(){
+	public void mouvement(){//Animation du mouvement de la voiture en créant un nouveau thread
 	    SwingWorker sw = new SwingWorker(){
 	    	protected Object doInBackground() throws Exception {
 	    		int progres=0;
@@ -567,18 +567,18 @@ public class GameBoard extends JPanel implements MouseListener, MouseMotionListe
 		}
 		  
 
-		public void checkCollision(){
+		public void checkCollision(){//vérification des collisions entre la voiture et l'environnement
 			
-			Rectangle voiture1Contour;
+			Rectangle voiture1Contour;//création d'un rectangle autour de la voiture et correspondant aux dimension renseigner dans sa classe
 			voiture1Contour = voiture1.getBounds();
 			Rectangle voiture2Contour;
 			voiture2Contour = voiture2.getBounds();
 			
 			for(int i=0; i<murs.size(); i++){
 				mur = murs.get(i);
-				Rectangle murContour = mur.getBounds();
+				Rectangle murContour = mur.getBounds();//création d'un rectangle autour du mur
 				
-				if(voiture1Contour.intersects(murContour)){
+				if(voiture1Contour.intersects(murContour)){//si les deux rectangle se touchent
 					voiture1.setVitesseX(voiture1.getVitesseX()/10);
 					voiture1.setVitesseY(voiture1.getVitesseY()/10);
 					collision=1;
@@ -658,7 +658,7 @@ public class GameBoard extends JPanel implements MouseListener, MouseMotionListe
 					System.out.println("Le joureur 1 a gagné");
 					sonArrivee.play();
 					
-					JOptionPane j = new JOptionPane();
+					JOptionPane j = new JOptionPane();//Ouverture d'une fenêtre de choix à la fin du jeu
 					String lesTextes[]={ "Recommencer", "Quitter le Jeu"};
 						
 					int retour = j.showOptionDialog(this,"Le Joueur 1 a gagné !\nQue voulez-vous faire ?","Fin de partie", JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, lesTextes, lesTextes[0]);
@@ -679,7 +679,7 @@ public class GameBoard extends JPanel implements MouseListener, MouseMotionListe
 					}					
 				}
 			}
-			if(modePluie == true){
+			if(modePluie == true){//Vérification que nous sommes dans le mode pluie pour ne pas faire de tests inutiles
 				for(int i=0; i<flaques.size(); i++){
 					flaque = flaques.get(i);
 					Rectangle flaqueContour = flaque.getBounds();
